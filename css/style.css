@@ -1,0 +1,4 @@
+.obavezno-polje::after { 
+    content: " *";
+	color: red;
+}
