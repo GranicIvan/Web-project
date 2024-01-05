@@ -108,6 +108,18 @@ class Database
         }
     }
 
+    public function getPostByID($id){
+        try {
+            $sql = "SELECT * FROM " . TBL_OBJAVA . " WHERE " . COL_OBJAVA_ID . "=:objava";
+            $st = $this->conn->prepare($sql);
+            $st->bindValue("objava", $id, PDO::PARAM_INT);
+            $st->execute();
+            return $st->fetch();
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
 
 
     public function checkLogin($username, $password)
@@ -126,6 +138,28 @@ class Database
     }
 
 
+    public function getKomentariByObjava($idObjava){
+        try {
+            $sql = "SELECT * FROM " . TBL_KOMENTAR . " WHERE " . COL_KOMENTAR_OBJAVA . "=:objava";
+            $st = $this->conn->prepare($sql);
+            $st->bindValue("objava", $idObjava, PDO::PARAM_INT);
+            $st->execute();
+            return $st->fetchAll();
+        } catch (PDOException $e) {
+            return array();
+        }
+    }
     
+    function getKreatorKomentaraByID($kreator){
+        try {
+            $sql = "SELECT * FROM " . TBL_KOMENTAR . " WHERE " . COL_KOMENTAR_KREATOR . "=:kreator";
+            $st = $this->conn->prepare($sql);
+            $st->bindValue("kreator", $kreator, PDO::PARAM_INT);
+            $st->execute();
+            return $st->fetchAll();
+        } catch (PDOException $e) {
+            return array();
+        }
+    }
 
 }
