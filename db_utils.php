@@ -156,9 +156,22 @@ class Database
             $st = $this->conn->prepare($sql);
             $st->bindValue("kreator", $kreator, PDO::PARAM_INT);
             $st->execute();
-            return $st->fetchAll();
+            return $st->fetch();
         } catch (PDOException $e) {
-            return array();
+            return null;
+        }
+    }
+
+
+    function getImePrezimeKreatoraKomentara($kreatorKomentaraID){
+        try {
+            $sql = "SELECT * FROM " . TBL_KORISNIK . " WHERE " . COL_KORISNIK_ID . "=:kreator";
+            $st = $this->conn->prepare($sql);
+            $st->bindValue("kreator", $kreatorKomentaraID, PDO::PARAM_INT);
+            $st->execute();
+            return $st->fetch();
+        } catch (PDOException $e) {
+            return null;
         }
     }
 

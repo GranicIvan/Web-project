@@ -28,20 +28,25 @@ function getKomentariHTML($komentari, $d){
 
         foreach($komentari as $jedanKomentar){
             $kreatorKomentara = $d->getKreatorKomentaraByID($jedanKomentar[COL_KOMENTAR_KREATOR]);
+           
+            $imeIPrezimeKreatoraKomentara = $d->getImePrezimeKreatoraKomentara($kreatorKomentara["Kreator_Komentara"]);
+            $imePrezimeKreat = $imeIPrezimeKreatoraKomentara["Ime"]. " " . $imeIPrezimeKreatoraKomentara["Prezime"];
+            
             $temp = "
             <div class=\"jedanKomentar\">
-                <p>$kreatorKomentara[COL_KORISNIK_IME]</p>
+                <p>$imePrezimeKreat</p>
                 <p>{$jedanKomentar[COL_KOMENTAR_TEKST]}</p>
-                <p>{$jedanKomentar[COL_KOMENTAR_TEMA]}</p>
+                
 
             <div/>
             ";
-            $rez +=$temp;
+            $rez = $rez . $temp;
         }
 
 
-        $rez+= "</div>
+        $rez= $rez. "</div>
         </div>";
+        return $rez;
     }else{
         return "
         <div class=\"kontejner\">
