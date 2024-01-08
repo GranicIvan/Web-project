@@ -8,6 +8,8 @@
 require_once("db_utils.php");
 $d = new Database();
 
+session_start();
+
 if (isset($_GET["izabranPost"])) {
     //Ovo okrenuti
 }else{
@@ -83,6 +85,35 @@ function getObjavaiHTMLObjava($objava, $kreator)
 			</div>";
 }
 
+
+
+function pisanjeKomentara(){
+    if (isset($_SESSION["user"]) ){
+        $temp = $_SESSION["user"];
+        $idPosta = $_GET["izabranPost"];
+    
+        return "
+            
+        <form method=\"post\" action=\"objavaKomentara.php\">
+
+                <textarea id=\"formaKom\" name=\"formaKom\" rows=\"4\" cols=\"50\">Vas kometar</textarea>
+                <br/>
+                
+                <input type=\"hidden\" id=\"izabranPost\" name=\"izabranPost\" value=$idPosta>
+
+                <input type=\"submit\" name=\"Komentarisi\" value=\"Komentarisi\">
+		</form>
+
+           
+        ";
+    }else{
+        return "
+            <div class='ulogujSeDaPisesKomentar'>
+                <p>Morate biti ulogovoni da bi pisali komentare<p/>
+            <div/>
+        ";
+    }
+}
 ?>
 
 <head>
@@ -111,9 +142,13 @@ function getObjavaiHTMLObjava($objava, $kreator)
 
 
     <div class="pisanjeKomentara">
+        <?php 
+           echo pisanjeKomentara();
+        ?>
         <p>Ovde je text field za pisanje komentara za odredeni post i dugme submit</p>
 
     </div>
+    <button onclick="history.back()">Vratite se na sve postove</button>
 
 </body>
 </html>

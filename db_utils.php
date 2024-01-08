@@ -175,4 +175,25 @@ class Database
         }
     }
 
+    function postaviKomentar($tekstKomentara, $zaPost, $komentator){
+        try {
+            
+            $komentatorID = $komentator[COL_KORISNIK_ID];
+            
+            $sql_insert = "INSERT INTO " . TBL_KOMENTAR . " (".COL_KOMENTAR_TEKST.","
+                                                          .COL_KOMENTAR_OBJAVA.","
+                                                          .COL_KOMENTAR_KREATOR.")"
+                        ." VALUES (:tekst, :objava, :kreator)";
+
+            $st = $this->conn->prepare($sql_insert);
+            $st->bindValue("tekst", $tekstKomentara, PDO::PARAM_STR);
+            $st->bindValue("objava", $zaPost, PDO::PARAM_STR);
+            $st->bindValue("kreator", $komentatorID, PDO::PARAM_STR);         
+            
+            return $st->execute();
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
 }
