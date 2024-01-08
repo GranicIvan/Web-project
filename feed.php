@@ -23,7 +23,6 @@ if (isset($_POST["loginButton"])) {
     }
 }else {
     
-    echo "TODO ovde da se proveri da li smo logged in i ispisemo sta treba<br/>";
 }
 
 
