@@ -145,7 +145,7 @@ function pisanjeKomentara(){
         <?php 
            echo pisanjeKomentara();
         ?>
-        <p>Ovde je text field za pisanje komentara za odredeni post i dugme submit</p>
+       
 
     </div>
     <button onclick="history.back()">Vratite se na sve postove</button>

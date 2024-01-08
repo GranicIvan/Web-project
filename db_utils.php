@@ -196,4 +196,27 @@ class Database
         }
     }
 
+    //$naslov, $tekst, $kreator
+    function postaviPost($naslov, $tekst, $kreator){
+        try {
+            
+            $kreatorID = $kreator[COL_KORISNIK_ID];
+            
+            $sql_insert = "INSERT INTO " . TBL_OBJAVA . " (".COL_OBJAVA_NASLOV.","
+                                                          .COL_OBJAVA_TEKST.","
+                                                          .COL_OBJAVA_KREATOR.","
+                                                          .COL_OBJAVA_DATUM.")"
+                        ." VALUES (:naslov, :tekst, :kreator, :datum)";
+
+            $st = $this->conn->prepare($sql_insert);
+            $st->bindValue("naslov", $naslov, PDO::PARAM_STR);
+            $st->bindValue("tekst", $tekst, PDO::PARAM_STR);
+            $st->bindValue("kreator", $kreatorID, PDO::PARAM_STR);     
+            $st->bindValue("datum", date("Y-m-d H:i:s"), PDO::PARAM_STR);      
+            
+            return $st->execute();
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }
