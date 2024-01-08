@@ -41,7 +41,6 @@ function getObjavaiHTML($objava, $kreator)
                     <p>{$objava[COL_OBJAVA_TEKST]}</p>
                     <p>{$objava[COL_OBJAVA_DATUM]}</p>
                    
-                    //Ovde bi dosli komentari
 					 <br/>
                      
 				</div>
@@ -73,6 +72,8 @@ function getObjavaiHTML($objava, $kreator)
     }
 
     ?>
+
+    <a href="objavaPosta.php">Obavite post</a>
 
 </body>
 
