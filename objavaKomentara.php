@@ -9,8 +9,8 @@ $d = new Database();
 session_start();
 
 if(isset($_POST["formaKom"]) ){
-    $tekstKomentara = $_POST["formaKom"];
-    $zaPost = $_POST["izabranPost"];
+    $tekstKomentara = htmlspecialchars($_POST["formaKom"]);
+    $zaPost = htmlspecialchars($_POST["izabranPost"]);
     $komentator = $_SESSION["user"];
 
     $uspelo =  $d->postaviKomentar($tekstKomentara, $zaPost, $komentator);
@@ -31,9 +31,10 @@ if(isset($_POST["formaKom"]) ){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ObjavaKomentara</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <p>OBJAVILI STE KOMETAR</p>
-    <button onclick="history.back()">Vratite se na post</button>
+    <button class="buttonVracanje" onclick="history.back()">Vratite se na post</button>
 </body>
 </html>

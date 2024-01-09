@@ -61,7 +61,6 @@ function getObjavaiHTML($objava, $kreator)
                     <p>{$objava[COL_OBJAVA_TEKST]}</p>
                     <p>{$objava[COL_OBJAVA_DATUM]}</p>
                    
-                    //Ovde bi dosli komentari
 					 <br/>
 
 				</div>
@@ -139,12 +138,18 @@ if (isset($_POST["registerButton"])) {
 </head>
 
 <body>
-    <h1>Forum Prirodno matematickog fakulteta</h1>
+    
+    <h1>Forum Prirodno Matematickog Fakulteta</h1>
 
+
+    <div id="sadrzaj">
+
+
+    
 
     <?php
     if (!empty($messages)) {
-        echo "<div class=\"kontejner poruke svetlo\">";
+        echo "<div class=\" poruke svetlo\">";
         foreach ($messages as $message) {
             echo "<div>$message</div>";
         }
@@ -153,7 +158,7 @@ if (isset($_POST["registerButton"])) {
     ?>
 
     <!-- OVDE SREDI ZA CSS -->
-    <div class="kontejner login svetlo">
+    <div class="kontejner login">
         <h2>Uloguj se</h2>
         <form method="post" action="feed.php">
             <label for="username">Email:</label>
@@ -164,6 +169,7 @@ if (isset($_POST["registerButton"])) {
 
             <input type="checkbox" name="remember-me" checked> Zapamti moj username<br>
             <a href="?forget-me">Forget me</a>
+            <br>
 
             <input type="submit" name="loginButton" value="Uloguj se">
         </form>
@@ -206,26 +212,19 @@ if (isset($_POST["registerButton"])) {
     </div>
 
     <?php
-    // $korisniks = $d->getKorisniks();
-    // if (count($korisniks) > 0) {
-    //     foreach ($korisniks as $korisnik) {
-    //         echo getKorisniciHTML($korisnik);
-    //     }
-    // }
-
-    // $posts = $d->getPosts();
-    // if (count($posts) > 0) {
-    //     foreach ($posts as $jedanPost) {
-    //         $kreator = $d->getUserByID($jedanPost[COL_OBJAVA_KREATOR]);
-    //         echo getObjavaiHTML($jedanPost, $kreator);
-    //     }
-    // }
+ 
 
 
     ?>
 
-    <a href="feed.php">FEED</a>
+    <div class="anonimno ">
+       
+        <button  class="buttonAnonimno" onclick="window.location.href='feed.php';">Gledajte postove bez logovanja</button>
+    
+    </div>
+    
 
+    </div>
 </body>
 
 </html>
