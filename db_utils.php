@@ -51,7 +51,7 @@ class Database
                 . " VALUES (:email, :name, :surname, :password, :birthday)";
                 // VALUES (NULL, 'zala', 'gaza', 'laza@', '1234', '2024-01-18', NULL);
 
-                echo $sql_insert;
+                //echo $sql_insert;
 
                 $st = $this->conn->prepare($sql_insert);
                 $st->bindValue("name", $name, PDO::PARAM_STR);

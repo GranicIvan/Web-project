@@ -25,8 +25,7 @@ function getKomentariHTML($komentari, $d){
 
 
     if(count($komentari) >0){
-        $rez = "<div class=\"kontejner\">
-        <div class=\"komentar\">";
+        $rez = "";
 
         foreach($komentari as $jedanKomentar){
             $kreatorKomentara = $d->getKreatorKomentaraByID($jedanKomentar[COL_KOMENTAR_KREATOR]);
@@ -38,16 +37,15 @@ function getKomentariHTML($komentari, $d){
             <div class=\"jedanKomentar\">
                 <p>$imePrezimeKreat</p>
                 <p>{$jedanKomentar[COL_KOMENTAR_TEKST]}</p>
-                
+            </div>
 
-            <div/>
+            
             ";
             $rez = $rez . $temp;
         }
 
 
-        $rez= $rez. "</div>
-        </div>";
+        $rez= $rez. "";
         return $rez;
     }else{
         return "
@@ -93,7 +91,7 @@ function pisanjeKomentara(){
         $idPosta = $_GET["izabranPost"];
     
         return "
-            
+        
         <form method=\"post\" action=\"objavaKomentara.php\">
 
                 <textarea id=\"formaKom\" name=\"formaKom\" rows=\"4\" cols=\"50\">Vas kometar</textarea>
@@ -103,14 +101,14 @@ function pisanjeKomentara(){
 
                 <input type=\"submit\" name=\"Komentarisi\" value=\"Komentarisi\">
 		</form>
-
+        
            
         ";
     }else{
         return "
             <div class='ulogujSeDaPisesKomentar'>
                 <p>Morate biti ulogovoni da bi pisali komentare<p/>
-            <div/>
+            </div>
         ";
     }
 }
@@ -120,6 +118,7 @@ function pisanjeKomentara(){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Objava</title>
+     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     
@@ -135,7 +134,7 @@ function pisanjeKomentara(){
 
     <div class="komentari">
         <?php 
-        echo getKomentariHTML($komentari, $d);
+            echo getKomentariHTML($komentari, $d);
         ?>
 
     </div>
@@ -144,11 +143,12 @@ function pisanjeKomentara(){
     <div class="pisanjeKomentara">
         <?php 
            echo pisanjeKomentara();
-        ?>
-       
-
+        ?>       
     </div>
-    <button onclick="history.back()">Vratite se na sve postove</button>
+
+    <div class="vracanje">
+        <button class="buttonVracanje" onclick="history.back()">Vratite se na sve postove</button>
+    </div>
 
 </body>
 </html>
